@@ -1,14 +1,45 @@
 #include"List.h"
+#include<stddef.h>
 
-List::List(int n){}
+List::List(){
+	head = NULL;
+	tail = NULL;
+	lsize = 0;
+}
 
 List::~List(){}
 
-void List::insert(int n){}
+void List::insert(int n){
+	//Se crea nodo con valor "n"
+	Node* nuevo = new Node;
+	nuevo->val = n;
+	nuevo->next = NULL;
 
-void List::replace(Node i, int n){}
+	//Primer elemento
+	if(head == NULL){
+		nuevo->prev = NULL;
+		head = nuevo;
+		tail = head;
+	}
 
-void List::remove(Node i){}
+	//Mas de un elemento
+	else{
+		tail->next = nuevo;
+		nuevo->prev = tail;
+		tail = nuevo;
+	}
+	lsize++;
+}
+
+void List::replace(Node *i, int n){
+	i->val = n;
+}
+
+void List::remove(Node *i){
+	i->prev->next = i->next;
+	i->next->prev = i->prev;
+	delete i;
+}
 
 int List::size(){
 	return lsize;
@@ -18,10 +49,14 @@ bool List::empty(){
 	return lsize == 0;
 }
 
-Node List::next(Node i){
-	return i.next;
+Node* List::begin(){
+	return head;
 }
 
-Node List::prev(Node i){
-	return i.prev;
+Node* List::next(Node* i){
+	return i->next;
+}
+
+Node* List::prev(Node* i){
+	return i->prev;
 }
