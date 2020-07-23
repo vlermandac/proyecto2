@@ -4,8 +4,8 @@
 
 class RePairSimple{
 	private:
-		List seq;
-		map<pair<int,int>,int> pairs;
+		List sequence;
+		std::map<std::pair<int,int>,int> keys;
 	public:
 		RePairSimple();
 		~RePairSimple();
