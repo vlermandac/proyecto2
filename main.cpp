@@ -1,15 +1,14 @@
 #include<iostream>
-#include"List.h"
+#include"RePairSimple.h"
 
 using namespace std;
 
 int main(){
-	List a;
-	a.insert(2);
-	a.insert(3);
-	a.insert(4);
-	a.insert(5);
-	for(Node *it = a.begin(); it != NULL; it = it->next)
-		cout<<it->val<<endl;
+	List seq;
+	int n, a; cin>>n;
+	while(n--){ cin>>a; seq.insert(a); }
+	RePairSimple rp;
+	rp.compress(seq);
+	//rp.print();
 	return 0;
 }

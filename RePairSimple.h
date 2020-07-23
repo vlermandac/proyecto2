@@ -10,4 +10,5 @@ class RePairSimple{
 		RePairSimple();
 		~RePairSimple();
 		void compress(List);
+		void print();
 };

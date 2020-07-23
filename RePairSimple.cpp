@@ -1,4 +1,5 @@
 #include"RePairSimple.h"
+#include<iostream>
 
 using namespace std;
 
@@ -28,4 +29,15 @@ void RePairSimple::compress(List seq){
 				seq.replace(it, keys[{max_i, max_j}]);
 			}
 	}
+
+	for(Node* it = seq.begin(); it != NULL; it = it->next)
+		cout<<it->val<<" ";
+	cout<<endl;
+	sequence = seq;
+}
+
+void RePairSimple::print(){
+	for(Node* it = sequence.begin(); it != NULL; it = it->next)
+		cout<<it->val<<" ";
+	cout<<endl;
 }
