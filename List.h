@@ -2,6 +2,8 @@ class Node{
 	public:
 		Node *prev;
 		Node *next;
+		Node *prevPair;
+		Node *nextPair;
 		int val;
 };
 
