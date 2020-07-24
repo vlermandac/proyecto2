@@ -20,5 +20,6 @@ class List{
 		int size();
 		bool empty();
 		Node* begin();
+		Node* nd();
 
 };

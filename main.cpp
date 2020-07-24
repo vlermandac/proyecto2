@@ -9,6 +9,6 @@ int main(){
 	while(n--){ cin>>a; seq.insert(a); }
 	RePairSimple rp;
 	rp.compress(seq);
-	//rp.print();
+	rp.print();
 	return 0;
 }

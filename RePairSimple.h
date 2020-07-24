@@ -4,7 +4,10 @@
 
 class RePairSimple{
 	private:
+		//secuencia comprimida
 		List sequence;
+
+		//claves para descomprimir
 		std::map<std::pair<int,int>,int> keys;
 	public:
 		RePairSimple();

@@ -32,13 +32,19 @@ void List::insert(int n){
 }
 
 void List::replace(Node *i, int n){
-	i->val = n;
+	if(i != NULL) i->val = n;
 }
 
 void List::remove(Node *i){
-	i->prev->next = i->next;
-	i->next->prev = i->prev;
-	delete i;
+	//casos bordes
+	if(head == NULL) return;
+	if(tail == NULL) return;
+	if(i == NULL) return;
+	if(head == i) head = i->next;
+	if(tail == i) tail = i->prev;
+	//caso general
+	if(i->prev != NULL) i->prev->next = i->next;
+	if(i->next != NULL) i->next->prev = i->prev;
 }
 
 int List::size(){
@@ -53,10 +59,7 @@ Node* List::begin(){
 	return head;
 }
 
-Node* List::next(Node* i){
-	return i->next;
+Node* List::nd(){
+	return tail;
 }
 
-Node* List::prev(Node* i){
-	return i->prev;
-}
