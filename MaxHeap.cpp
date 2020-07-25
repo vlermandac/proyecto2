@@ -62,3 +62,9 @@ bool MaxHeap::empty() {
 	return hsize == 0;
 }
 
+void changeKey(hnode x, int n){
+	int aux = x.key;
+	x.key = n;
+	if(x.key > aux) upheap(i);
+	if(x.key < aux) downheap(i);
+}

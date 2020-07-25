@@ -25,5 +25,6 @@ class MaxHeap{
 		void pop();
 		hnode top();
 		bool empty();
+		void changeKey(int, int);
 };
 
