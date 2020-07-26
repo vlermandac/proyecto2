@@ -1,6 +1,5 @@
-#include <bits/stdc++.h>
-using namespace std;
-typedef pair<int,int> ii;
+#include<vector>
+typedef std::pair<int,int> ii;
 
 struct hnode{
 	int key;
@@ -11,7 +10,7 @@ struct hnode{
 
 class MaxHeap{
 	private:
-		vector<hnode> seq;
+		std::vector<hnode> seq;
 		int hsize;
 		int parent(int);
 		int left(int);
@@ -25,6 +24,8 @@ class MaxHeap{
 		void pop();
 		hnode top();
 		bool empty();
-		void changeKey(int, int);
+		void changeKey(hnode, int);
+		hnode *lastNode();
+		void print();
 };
 

@@ -1,4 +1,6 @@
 #include "MaxHeap.h"
+#include<iostream>
+using namespace std;
 
 MaxHeap::MaxHeap(){
 	seq.push_back(hnode(0,ii(0,0)));
@@ -62,9 +64,20 @@ bool MaxHeap::empty() {
 	return hsize == 0;
 }
 
-void changeKey(hnode x, int n){
+void MaxHeap::changeKey(hnode x, int n){
 	int aux = x.key;
 	x.key = n;
+	vector<hnode>::iterator bg = seq.begin();
+	hnode *ini = &*bg;
+	int i = ini - &x;
 	if(x.key > aux) upheap(i);
 	if(x.key < aux) downheap(i);
+}
+
+hnode* MaxHeap::lastNode(){
+	return &seq[hsize-1];
+}
+
+void MaxHeap::print(){
+	for(hnode i : seq) cout<<i.val.first<<" "<<i.val.second<<": "<<i.key<<endl;
 }
