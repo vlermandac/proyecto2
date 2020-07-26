@@ -1,5 +1,4 @@
-class Node{
-	public:
+struct Node{
 		Node *prev;
 		Node *next;
 		Node *prevPair;
