@@ -48,7 +48,9 @@ void MaxHeap::push(hnode x) {
 		seq.push_back(hnode(0, ii(0,0)));
 	}
 	seq[++hsize] = x;
+	lastpush = &seq[hsize];
 	upheap(hsize);
+
 }
 
 void MaxHeap::pop() {
@@ -69,15 +71,16 @@ void MaxHeap::changeKey(hnode* x, int n){
 	x->key = n;
 	vector<hnode>::iterator bg = seq.begin();
 	hnode *ini = &*bg;
-	int i = ini - x;
-	if(x->key > aux) upheap(i);
+	int i = x - ini;
+	//cout<<"->"<<i<<endl<<endl;
+//	if(x->key > aux) upheap(i);
 	if(x->key < aux) downheap(i);
 }
 
 hnode* MaxHeap::lastNode(){
-	return &seq[hsize-1];
+	return lastpush;
 }
 
 void MaxHeap::print(){
-	for(int i = 0; i < hsize; i++) cout<<seq[i].val.first<<" "<<seq[i].val.second<<": "<<seq[i].key<<endl;
+	for(int i = 1; i <= hsize; i++) cout<<seq[i].val.first<<" "<<seq[i].val.second<<": "<<seq[i].key<<endl;
 }

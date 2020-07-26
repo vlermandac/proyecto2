@@ -1,5 +1,7 @@
 #include"List.h"
 #include<stddef.h>
+#include<iostream>
+using namespace std;
 
 List::List(){
 	head = NULL;
