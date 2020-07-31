@@ -42,11 +42,18 @@ void List::remove(Node *i){
 	if(head == NULL) return;
 	if(tail == NULL) return;
 	if(i == NULL) return;
-	if(head == i) head = i->next;
-	if(tail == i) tail = i->prev;
+	if(head == i){
+		head = i->next;
+		head->prev = NULL;
+	}
+	if(tail == i){
+		tail = i->prev;
+		tail->next = NULL;
+	}
 	//caso general
 	if(i->prev != NULL) i->prev->next = i->next;
 	if(i->next != NULL) i->next->prev = i->prev;
+	delete i;
 }
 
 int List::size(){

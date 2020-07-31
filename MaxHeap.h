@@ -4,12 +4,17 @@ typedef std::pair<int,int> ii;
 struct hnode{
 	int key;
 	ii val;
-	hnode(int a, ii b){ key = a; val = b; }
+	int idx;
+	hnode(int a, ii b){ key = a;
+		val.first = b.first;
+		val.second = b.second;
+	}
 };
 
 
 class MaxHeap{
 	private:
+		std::vector<hnode*> seq;
 		int hsize;
 		hnode* lastpush;
 		int parent(int);
@@ -18,15 +23,15 @@ class MaxHeap{
 		void upheap(int);
 		void downheap(int);
 	public:
-		std::vector<hnode> seq;
 		MaxHeap();
 		~MaxHeap();
-		void push(hnode);
+		void push(hnode*);
 		void pop();
-		hnode top();
+		hnode* top();
 		bool empty();
 		void changeKey(hnode*, int);
 		hnode *lastNode();
 		void print();
+		int getIndex(hnode*);
 };
 
