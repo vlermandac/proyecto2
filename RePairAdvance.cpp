@@ -26,6 +26,23 @@ void RePairAdvance::init_pair(Node* n1, Node* n2){
 	n1->nextPair = NULL;
 }
 
+void RePairAdvance::increase_pair(Node* n1, Node* n2){
+
+	if(pairs[{n1->val, n2->val}].lastPair->next == n1) return;
+	//aumenta frecuencia del par
+	hnode* poss = pairs[{n1->val, n2->val}].pos;
+	hp.changeKey(poss, poss->key + 1);
+
+	//setear ocurrencia previa y siguiente del par
+	n1->prevPair = pairs[{n1->val, n2->val}].lastPair;
+	n1->prevPair->nextPair = n1;
+	n1->nextPair = NULL;
+
+	//actualizar ultima ocurrencia del par
+	pairs[{n1->val, n2->val}].lastPair = n1;
+
+}
+
 void RePairAdvance::compress(List seq){
 	pairs.clear();
 	//CLEAR HP
@@ -38,32 +55,17 @@ void RePairAdvance::compress(List seq){
 			init_pair(it, it->next);
 
 		//par repetido
-		else{
-
-			//aumenta frecuencia del par
-			hnode* poss = pairs[{it->val, it->next->val}].pos;
-			hp.changeKey(poss, poss->key + 1);
-
-			//setear ocurrencia previa y siguiente del par
-			it->prevPair = pairs[{it->val, it->next->val}].lastPair;
-			it->prevPair->nextPair = it;
-			it->nextPair = NULL;
-
-			//actualizar ultima ocurrencia del par
-			pairs[{it->val, it->next->val}].lastPair = it;
-		}
+		else increase_pair(it, it->next);
 	}
 
 	//Fase 2. comienza remplazo
 	hnode* maxnode = hp.top();
 	int symbol_number = 28;
 	while(maxnode->key > 1){
-		symbols[{maxnode->val.first, maxnode->val.second}] =symbol_number;
+		hp.pop();
 		Node* it = pairs[{maxnode->val.first, maxnode->val.second}].firstPair;
-		cout<<"Maxnode: "<<maxnode->val.first<<" "<<maxnode->val.second<<" "<<maxnode->key<<endl;
 		for(it; it != NULL; it = it->nextPair){
 
-			cout<<"->>"<<it->val<<" "<<it->next->val<<endl;
 			//disminuir frecuencia pares adyacentes
 			//cambiar punteros pares adyacentes
 			if(it != seq.begin()){
@@ -81,63 +83,31 @@ void RePairAdvance::compress(List seq){
 			}
 
 			seq.replace(it->next, symbol_number);
-	if(it->nextPair != NULL) cout<<"AA: "<<it->nextPair->val<<" "<<it->nextPair->next->val<<endl;
 
 			//CREAR PARES ADJACENTES
-		cout<<"1Elementos heap: ";
-		hp.print();
 
 			if(it != seq.begin()){
 				if(pairs.find(ii(it->prev->val, it->next->val)) == pairs.end())
 					init_pair(it->prev, it->next);
 
-				else{
-					//aumenta frecuencia del par
-					hnode* poss = pairs[{it->prev->val, it->next->val}].pos;
-					hp.changeKey(poss, poss->key + 1);
-
-					//setear ocurrencia previa y siguiente del par
-					it->prev->prevPair = pairs[{it->prev->val, it->next->val}].lastPair;
-					it->prev->prevPair->nextPair = it->prev;
-					it->prev->nextPair = NULL;
-
-					//actualizar ultima ocurrencia del par
-					pairs[{it->prev->val, it->next->val}].lastPair = it->prev;
-				}
+				else increase_pair(it->prev, it->next);
 			}
 			if(it->next != seq.nd()) {
-	for(Node *itt = pairs[{maxnode->val.first, maxnode->val.second}].lastPair; itt != NULL; itt = itt->next) cout<<itt->val<<" ";
-			cout<<endl;
 				if(pairs.find(ii(it->next->val, it->next->next->val)) == pairs.end())
 					init_pair(it->next, it->next->next);
 
-				else{
-						//aumenta frecuencia del par
-						hnode* poss = pairs[{it->next->val, it->next->next->val}].pos;
-						hp.changeKey(poss, poss->key + 1);
+				else increase_pair(it->next, it->next->next);
 
-						//setear ocurrencia previa y siguiente del par
-						it->next->prevPair = pairs[{it->next->val, it->next->next->val}].lastPair;
-						it->next->prevPair->nextPair = it->next;
-						it->next->nextPair = NULL;
-
-						//actualizar ultima ocurrencia del par
-						pairs[{it->next->val, it->next->next->val}].lastPair = it->next;
-				}
 			}
 			seq.remove(it);
-	for(Node *itt = seq.begin(); itt != NULL; itt = itt->next) cout<<itt->val<<" ";
-			cout<<endl;
-		cout<<"2Elementos heap: ";
-		hp.print();
-
-			cout<<endl;
 		}
-		cout<<"sali\n";
-		hp.pop();
 
 		maxnode = hp.top();
+
 		symbol_number++;
 	}
-//	for(Node *itt = seq.begin(); itt != NULL; itt = itt->next) cout<<itt->val<<" ";
+	for(Node *itt = seq.begin(); itt != NULL; itt = itt->next) cout<<itt->val<<" ";
+	cout<<endl;
+
+
 }

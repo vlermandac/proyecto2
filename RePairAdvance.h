@@ -16,6 +16,7 @@ class RePairAdvance{
 		std::map< std::pair<int, int>, info> pairs;
 		MaxHeap hp;
 		void init_pair(Node*, Node*);
+		void increase_pair(Node*, Node*);
 	public:
 		RePairAdvance();
 		~RePairAdvance();

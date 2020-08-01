@@ -54,7 +54,7 @@ void MaxHeap::push(hnode* x) {
 
 void MaxHeap::pop() {
 	swap(seq[1], seq[hsize--]);
-	//seq.erase(seq.end());
+	seq.erase(seq.begin() + hsize +1);
 	downheap(1);
 }
 
@@ -78,7 +78,7 @@ hnode* MaxHeap::lastNode(){
 }
 
 void MaxHeap::print(){
-	for(int i = 1; i <= hsize; i++)
+	for(int i = 1; i < seq.size(); i++)
 		cout<<seq[i]->val.first<<" "<<seq[i]->val.second<<": "<<seq[i]->key<<endl;
 }
 
