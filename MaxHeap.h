@@ -5,7 +5,8 @@ struct hnode{
 	int key;
 	ii val;
 	int idx;
-	hnode(int a, ii b){ key = a;
+	hnode(int a, ii b){
+		key = a;
 		val.first = b.first;
 		val.second = b.second;
 	}
@@ -16,7 +17,6 @@ class MaxHeap{
 	private:
 		std::vector<hnode*> seq;
 		int hsize;
-		hnode* lastpush;
 		int parent(int);
 		int left(int);
 		int right(int);
@@ -28,10 +28,8 @@ class MaxHeap{
 		void push(hnode*);
 		void pop();
 		hnode* top();
-		bool empty();
 		void changeKey(hnode*, int);
-		hnode *lastNode();
+		void clear();
 		void print();
-		int getIndex(hnode*);
 };
 

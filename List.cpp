@@ -1,6 +1,5 @@
 #include"List.h"
 #include<stddef.h>
-#include<iostream>
 using namespace std;
 
 List::List(){
@@ -12,19 +11,19 @@ List::List(){
 List::~List(){}
 
 void List::insert(int n){
-	//Se crea nodo con valor "n"
+	//se crea nodo con valor "n"
 	Node* nuevo = new Node;
 	nuevo->val = n;
 	nuevo->next = NULL;
 
-	//Primer elemento
+	//si es primer elemento
 	if(head == NULL){
 		nuevo->prev = NULL;
 		head = nuevo;
 		tail = head;
 	}
 
-	//Mas de un elemento
+	//si hay mas de un elemento
 	else{
 		tail->next = nuevo;
 		nuevo->prev = tail;

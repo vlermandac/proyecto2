@@ -2,17 +2,16 @@
 #include"MaxHeap.h"
 #include<map>
 
+//estructura que correspondera al valor del map
 struct info{
 	Node *firstPair;
 	Node *lastPair;
 	hnode *pos;
-	int frec = -1;
 };
 
 class RePairAdvance{
 	private:
 		List seq;
-		std::map<std::pair<int,int>,int> symbols;
 		std::map< std::pair<int, int>, info> pairs;
 		MaxHeap hp;
 		void init_pair(Node*, Node*);
